@@ -13,9 +13,11 @@
     <%= render 'shared/navigation' %>
     <%= render 'layouts/notice' %>
     <div class="row">
-      <div class="col-2 side-nav">
-        <%= render 'shared/sidenav'%>
-      </div>
+      <% if @categories.present? %>
+        <div class="col-2 side-nav">
+          <%= render 'shared/sidenav'%>
+        </div>
+      <% end %>
       <div class="col">
         <div class="container">
           <%= yield %>
