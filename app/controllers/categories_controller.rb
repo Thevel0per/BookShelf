@@ -33,12 +33,19 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    @categories = Category.all
     @category = Category.find(params[:id])
+    @ebooks = EbooksSearch.new(query_params(@category.id).merge(page: params[:page], per_page: params[:per_page])).call
   end
 
   private
 
   def category_params
     params.require(:category).permit(:name)
+  end
+
+  def query_params(category_id)
+    p = params.permit(:search_query)
+    { search_query: p[:search_query], category: category_id }.compact
   end
 end

@@ -20,10 +20,10 @@
         </li>
       <% end %>
     </ul>
-    <form class="form-inline ebook-search-form mr-auto">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <%= form_with url: request.original_url, method: :get, local: true, class: 'form-inline ebook-search-form mr-auto' do |f| %>
+      <%= f.text_field :search_query, placeholder: "Search#{search_placeholder}", class:'form-control mr-sm-2'%>
+      <%= f.submit 'Search', class: 'btn btn-outline-primary my-2 my-sm-0'%>
+    <% end %>
     <ul class="navbar-nav mt-2 mt-lg-0">
       <% unless logged_in? %>
         <li class="nav-item">
@@ -39,7 +39,7 @@
           </li>
         <% end %>
         <li class="nav-item">
-          <%= link_to 'Logout', logout_path, class: 'nav-link'%>
+          <%= link_to 'Logout', logout_path, method: :delete, class: 'nav-link btn btn-secondary'%>
         </li>
       <% end %>
     </ul>

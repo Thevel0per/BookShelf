@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_24_133347) do
+ActiveRecord::Schema.define(version: 2020_02_24_231157) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -22,12 +22,13 @@ ActiveRecord::Schema.define(version: 2020_02_24_133347) do
     t.integer "category_id"
     t.string "title"
     t.string "author"
-    t.string "description"
+    t.text "description"
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "photo_url"
     t.integer "stock"
+    t.text "abstract"
     t.index ["category_id"], name: "index_ebooks_on_category_id"
   end
 

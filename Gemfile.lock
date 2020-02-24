@@ -57,6 +57,8 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
+    bootstrap-will_paginate (1.0.0)
+      will_paginate
     builder (3.2.4)
     byebug (11.1.1)
     capybara (3.31.0)
@@ -80,6 +82,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
+    dry-initializer (2.5.0)
     erubi (1.9.0)
     execjs (2.7.0)
     ffi (1.12.2)
@@ -205,6 +208,7 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
+    will_paginate (3.2.1)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
@@ -215,10 +219,12 @@ DEPENDENCIES
   bcrypt
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.4.1)
+  bootstrap-will_paginate
   byebug
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
+  dry-initializer
   font-awesome-rails (~> 4.7, >= 4.7.0.2)
   jbuilder (~> 2.5)
   jquery-rails
