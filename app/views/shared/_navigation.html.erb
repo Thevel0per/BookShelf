@@ -5,15 +5,20 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
     <%= link_to 'BookShelf', root_path, class:'navbar-brand'%>
     <ul class="navbar-nav mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
+      <% if logged_in? && current_user.admin?%>
+        <li class="nav-item">
+          <%= link_to 'Add Product', new_ebook_path, class: 'nav-link'%>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Categories
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to 'All Categories', categories_path, class: 'dropdown-item'%>
+            <%= link_to 'Add Products Category', new_category_path, class: 'dropdown-item'%>
+          </div>
+        </li>
+      <% end %>
     </ul>
     <form class="form-inline ebook-search-form mr-auto">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -28,9 +33,11 @@
           <%= link_to 'Login', login_path, class: 'nav-link'%>
         </li>
       <% else %>
-        <li>
-          <%= link_to 'Basket', basket_user_path(current_user), class: 'nav-link'%>
-        </li>
+        <% unless current_user.admin? %>
+          <li>
+            <%= link_to 'Basket', basket_user_path(current_user), class: 'nav-link'%>
+          </li>
+        <% end %>
         <li class="nav-item">
           <%= link_to 'Logout', logout_path, class: 'nav-link'%>
         </li>
