@@ -1,0 +1,48 @@
+<div class="basket-items">
+  <% @ebooks.each do |e| %>
+    <div class="card">
+      <div class="card-body">
+          <div class="row">
+            <div class="col-sm-3">
+              <%= image_tag e['photo_url'] %>
+            </div>
+            <div class="col-sm-3">
+              <div class="row">
+                <%= e['title'] %>
+              </div>
+              <div class="row">
+                <%= "Quantity: #{e[:quantity]}"%>
+              </div>
+              <div class="row">
+              <%# TODO COUNT BASKET VALUE %>
+                <%= "#{e['price'] * e[:quantity]} zł"%>
+              </div>
+            </div>
+            <div class="col-sm-6 my-auto">
+              <div class="row justify-content-end">
+                <div class="col-sm-2">
+                  <%= link_to (fa_icon "minus"), "/remove_from_basket/#{e['id']}", method: :delete, class: 'btn btn-danger'%>
+                </div>
+                <div class="col-sm-2">
+                  <%= link_to (fa_icon "plus"), "/add_to_basket/#{e['id']}", class: 'btn btn-success'%>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+<% end %>
+</div>
+<div class="checkout">
+  <div class="col">
+    <div class="row justify-content-end">
+      <div class="col">
+        <div class="row justify-content-end"><%= "Amount to pay: #{count_basket_value(@ebooks)[:amount]} zł" %></div>
+        <div class="row justify-content-end"><small><%= "Full value: #{count_basket_value(@ebooks)[:full_value]} zł | Discount: #{count_basket_value(@ebooks)[:discount]} zł" %></small></div>
+      </div>
+    </div>
+    <div class="row justify-content-end">
+      <%= link_to 'Checkout', '#', class: 'btn btn-primary'%>
+    </div>
+  </div>
+</div>

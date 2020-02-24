@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_23_194546) do
+ActiveRecord::Schema.define(version: 2020_02_24_133347) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_02_23_194546) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "photo_url"
+    t.integer "stock"
     t.index ["category_id"], name: "index_ebooks_on_category_id"
   end
 
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(version: 2020_02_23_194546) do
     t.integer "ebook_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "quantity", default: 0
     t.index ["ebook_id"], name: "index_user_ebooks_on_ebook_id"
     t.index ["user_id"], name: "index_user_ebooks_on_user_id"
   end

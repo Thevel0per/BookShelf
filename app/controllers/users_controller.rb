@@ -35,6 +35,11 @@ class UsersController < ApplicationController
 
   end
 
+  def basket
+    @user = current_user
+    @ebooks = ebooks_with_quantities(@user)
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -59,5 +64,15 @@ class UsersController < ApplicationController
 
     flash[:danger] = 'Only admin can do that.'
     redirect_to root_path
+  end
+
+  def ebooks_with_quantities(user)
+    ebooks = user.ebooks
+    ebooks_with_quantities = []
+    ebooks.each do |e|
+      quantity = UserEbook.where(user_id: user.id, ebook_id: e.id).first.quantity
+      ebooks_with_quantities << e.serializable_hash.merge('quantity': quantity)
+    end
+    ebooks_with_quantities
   end
 end
