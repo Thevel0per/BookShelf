@@ -1,4 +1,6 @@
 class CategoriesController < ApplicationController
+  before_action :require_admin, except: %i[show]
+
   def index
     @categories = Category.all
   end
