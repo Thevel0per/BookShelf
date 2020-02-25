@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-  helper_method :current_user, :logged_in?, :count_basket_value, :notice_class, :search_placeholder
+  helper_method :current_user, :logged_in?, :count_order_value, :notice_class, :search_placeholder
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -24,8 +24,9 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
-  def count_basket_value(ebooks)
-    full_value = ebooks.map { |e| e[:quantity] * e['price'] }.sum
+  def count_order_value(ebooks, basket, order_id = 0)
+    full_value = ebooks.map { |e| e[:quantity] * e['price'] }.sum if basket
+    full_value = ebooks.map { |e| e.ordered_quantity(order_id) * e['price'] }.sum unless basket
     discount = count_discount(ebooks, full_value)
     discount += 20 if full_value - discount >= 200
 

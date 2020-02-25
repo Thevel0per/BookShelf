@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @user = User.find(current_user.id)
   end
 
   # POST /users
@@ -29,6 +30,12 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = User.find(current_user.id)
+    if @user.update(user_params)
+      redirect_to root_path, notice: 'Your profile was successfully updated'
+    else
+      render 'edit'
+    end
   end
 
   def destroy

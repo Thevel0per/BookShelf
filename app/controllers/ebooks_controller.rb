@@ -1,31 +1,49 @@
 class EbooksController < ApplicationController
+  before_action :require_admin, except: %i[index show add_to_basket remove_from_basket]
+
   def index
     @ebooks = EbooksSearch.new(query_params.merge(page: params[:page], per_page: params[:per_page])).call
     @categories = Category.all
   end
 
   def show
-
+    @ebook = Ebook.find(params[:id])
   end
 
   def new
-
+    @ebook = Ebook.new
   end
 
   def create
-
+    @ebook = Ebook.new(ebook_params)
+    if @ebook.save
+      redirect_to root_path, notice: 'Ebook added'
+    else
+      render 'new'
+    end
   end
 
   def edit
-
+    @ebook = Ebook.find(params[:id])
   end
 
   def update
+    @ebook = Ebook.find(params[:id])
 
+    if @ebook.update(ebook_params)
+      redirect_to root_path, notice: 'Ebook updated'
+    else
+      render 'edit'
+    end
   end
 
   def destroy
-
+    @ebook = Ebook.find(params[:id])
+    if @ebook.destroy
+      redirect_to root_path, notice: 'Ebook was successfully deleted'
+    else
+      redirect_to root_path, notice: 'Could not delete ebook'
+    end
   end
 
   def add_to_basket
@@ -67,5 +85,11 @@ class EbooksController < ApplicationController
   def query_params
     p = params.permit(:search_query)
     { search_query: p[:search_query] }.compact
+  end
+
+  def ebook_params
+    params.require(:ebook).permit(:title, :author, :photo_url,
+                                  :abstract, :description, :price,
+                                  :stock, :category_id)
   end
 end

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     member do
       get 'basket', to: 'users#basket'
     end
+
+    resources :orders, only: %i[index show create]
   end
   resources :ebooks
   resources :categories

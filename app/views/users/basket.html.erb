@@ -37,12 +37,12 @@
   <div class="col">
     <div class="row justify-content-end">
       <div class="col">
-        <div class="row justify-content-end"><%= "Amount to pay: #{count_basket_value(@ebooks)[:amount]} zł" %></div>
-        <div class="row justify-content-end"><small><%= "Full value: #{count_basket_value(@ebooks)[:full_value]} zł | Discount: #{count_basket_value(@ebooks)[:discount]} zł" %></small></div>
+        <div class="row justify-content-end"><%= "Amount to pay: #{count_order_value(@ebooks, true)[:amount]} zł" %></div>
+        <div class="row justify-content-end"><small><%= "Full value: #{count_order_value(@ebooks, true)[:full_value]} zł | Discount: #{count_order_value(@ebooks, true)[:discount]} zł" %></small></div>
       </div>
     </div>
     <div class="row justify-content-end">
-      <%= link_to 'Checkout', '#', class: 'btn btn-primary'%>
+      <%= link_to 'Checkout', user_orders_path(current_user), method: :post, class: 'btn btn-primary'%>
     </div>
   </div>
 </div>

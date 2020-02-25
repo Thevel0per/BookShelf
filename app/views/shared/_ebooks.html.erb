@@ -6,9 +6,10 @@
     <div class="card">
       <%= image_tag ebook.photo_url, class: 'card-img-top', alt: "#{ebook.title} cover", height: '250px'%>
       <div class="card-body">
-        <h5 class="card-title"><%= ebook.title %></h5>
-        <h6 class="card-title"><%= ebook.author %></h6>
+        <h5 class="card-title"><%= link_to ebook.title, ebook_path(ebook) %></h5>
+        <h6 class="card-title"><strong><%= ebook.author %></strong></h6>
         <p class="card-text"><small class="badge badge-secondary"><%= link_to ebook.category.name, category_path(ebook.category) %></small></p>
+        <p class="card-text"><%= "#{ebook.price} zł" %></p>
         <p class="card-text"><%= ebook.abstract %></p>
         <p><small>Available: <%= ebook.stock %></small></p>
         <% if logged_in? && !current_user.admin? %>

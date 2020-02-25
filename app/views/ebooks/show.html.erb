@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-body">
+      <div class="row my-auto">
+        <div class="cover"><%= image_tag @ebook.photo_url %></div>
+        <div class="col">
+          <div class="row">
+            <h3><%= @ebook.title %></h3>
+          </div>
+          <div class="row">
+            <h5><%= @ebook.author %></h5>
+          </div>
+          <div class="row">
+            <%= "#{@ebook.price} zł"%>
+          </div>
+        </div>
+        <div class="col align-self-end">
+          <div class="row justify-content-end">
+          <% if logged_in? && !current_user.admin? %>
+            <div class="action-link"><%= link_to 'Add to basket', "/add_to_basket/#{@ebook.id}", class: 'btn btn-sm btn-primary' %></div>
+          <% elsif logged_in? && current_user.admin? %>
+            <div class="action-link">
+              <div class="row">
+                <div class="action-link"><%= link_to 'Edit Item', edit_ebook_path(@ebook), class: 'btn btn-sm btn-primary' %></div>
+                <div class="action-link"><%= link_to 'Delete Item', ebook_path(@ebook), method: :delete, class: 'btn btn-sm btn-danger' %></div>
+              </div>
+            </div>
+          <% end %>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<div class="card description">
+  <h3 align="center">Description</h3>
+  <div class="card-body">
+    <%= @ebook.description %>
+  </div>
+</div>

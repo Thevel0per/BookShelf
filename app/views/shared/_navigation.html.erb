@@ -8,15 +8,9 @@
       <% if logged_in? && current_user.admin?%>
         <li class="nav-item">
           <%= link_to 'Add Product', new_ebook_path, class: 'nav-link'%>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Categories
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%= link_to 'All Categories', categories_path, class: 'dropdown-item'%>
-            <%= link_to 'Add Products Category', new_category_path, class: 'dropdown-item'%>
-          </div>
+        </li> 
+        <li class="nav-item">
+          <%= link_to 'Add Ebooks Category', new_category_path, class: 'nav-link'%>
         </li>
       <% end %>
     </ul>
@@ -35,7 +29,16 @@
       <% else %>
         <% unless current_user.admin? %>
           <li>
-            <%= link_to 'Basket', basket_user_path(current_user), class: 'nav-link'%>
+            <%= link_to (fa_icon "shopping-basket", class: 'fa-2x'), basket_user_path(current_user), class: 'nav-link'%>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Your Profile
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to 'Edit Profile', edit_user_path(current_user), class: 'dropdown-item'%>
+              <%= link_to 'Your Orders', user_orders_path(current_user), class: 'dropdown-item'%>
+            </div>
           </li>
         <% end %>
         <li class="nav-item">

@@ -48,3 +48,17 @@
   width: fit-content;
   margin: 0 auto;
 }
+
+.description {
+  margin-top: 15px;
+}
+
+.card .cover img {
+  display: inline-block;
+  width: 275px !important;
+  height: 400px;
+}
+
+.cover {
+  display: inline;
+}
