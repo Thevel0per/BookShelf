@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :require_same_user, only: %i[edit]
+
   def index; end
 
   def show
@@ -12,7 +14,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(current_user.id)
+    @user = User.find(params[:id])
   end
 
   # POST /users
@@ -44,7 +46,7 @@ class UsersController < ApplicationController
 
   def basket
     @user = current_user
-    @ebooks = ebooks_with_quantities(@user)
+    @ebooks = @user.ebooks
   end
 
   private
@@ -71,15 +73,5 @@ class UsersController < ApplicationController
 
     flash[:danger] = 'Only admin can do that.'
     redirect_to root_path
-  end
-
-  def ebooks_with_quantities(user)
-    ebooks = user.ebooks
-    ebooks_with_quantities = []
-    ebooks.each do |e|
-      quantity = UserEbook.where(user_id: user.id, ebook_id: e.id).first.quantity
-      ebooks_with_quantities << e.serializable_hash.merge('quantity': quantity)
-    end
-    ebooks_with_quantities
   end
 end
