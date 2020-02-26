@@ -10,7 +10,6 @@
         <h6 class="card-title"><strong><%= ebook.author %></strong></h6>
         <p class="card-text"><small class="badge badge-secondary"><%= link_to ebook.category.name, category_path(ebook.category) %></small></p>
         <p class="card-text"><%= "#{ebook.price} zł" %></p>
-        <p class="card-text"><%= ebook.abstract %></p>
         <p><small>Available: <%= ebook.stock %></small></p>
         <% if logged_in? && !current_user.admin? %>
           <div class="card-text"><%= link_to 'Add to basket', "/add_to_basket/#{ebook.id}", class: 'btn btn-sm btn-primary' %></div>

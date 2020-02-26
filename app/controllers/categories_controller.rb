@@ -38,6 +38,11 @@ class CategoriesController < ApplicationController
     @ebooks = EbooksSearch.new(query_params(@category.id).merge(page: params[:page], per_page: params[:per_page])).call
   end
 
+  def destroy
+    @category = Category.find(params[:id])
+    redirect_to root_path, notice: 'Category deleted'
+  end
+
   private
 
   def category_params

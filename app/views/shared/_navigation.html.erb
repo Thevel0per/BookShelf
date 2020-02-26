@@ -8,9 +8,15 @@
       <% if logged_in? && current_user.admin?%>
         <li class="nav-item">
           <%= link_to 'Add Product', new_ebook_path, class: 'nav-link'%>
-        </li> 
-        <li class="nav-item">
-          <%= link_to 'Add Ebooks Category', new_category_path, class: 'nav-link'%>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Categories Actions
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to 'Add Ebooks Category', new_category_path, class: 'dropdown-item'%>
+            <%= link_to 'Categories List', categories_path, class: 'dropdown-item'%>
+          </div>
         </li>
       <% end %>
     </ul>
