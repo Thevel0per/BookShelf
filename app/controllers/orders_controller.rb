@@ -42,8 +42,12 @@ class OrdersController < ApplicationController
 
   def create_order_ebooks(ebooks, order_id)
     ebooks.each do |e|
-      oe = OrderEbook.new(ebook_id: e.id, order_id: order_id, quantity: e.quantity(current_user.id))
-      oe.save
+      quantity = e.quantity(current_user.id)
+      oe = OrderEbook.new(ebook_id: e.id, order_id: order_id, quantity: quantity)
+      if oe.save
+        e.stock -= quantity
+        e.save
+      end
     end
   end
 
