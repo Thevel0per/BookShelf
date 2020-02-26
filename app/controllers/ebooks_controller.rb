@@ -2,7 +2,7 @@ class EbooksController < ApplicationController
   before_action :require_admin, except: %i[index show add_to_basket remove_from_basket]
 
   def index
-    @ebooks = EbooksSearch.new(query_params.merge(page: params[:page], per_page: params[:per_page])).call
+    @ebooks = EbooksSearch.new(query_params).call
     @categories = Category.all
   end
 
@@ -84,7 +84,9 @@ class EbooksController < ApplicationController
 
   def query_params
     p = params.permit(:search_query)
-    { search_query: p[:search_query] }.compact
+    { search_query: p[:search_query],
+      page: params[:page],
+      per_page: params[:per_page] }.compact
   end
 
   def ebook_params

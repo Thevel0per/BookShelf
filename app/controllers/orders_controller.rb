@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(user_id: current_user.id)
+    @order = Order.new(user_id: current_user.id).paginate(page: params[:page], per_page: 5)
     @ebooks = ordered_ebooks
     if available?(@ebooks)
       @order.save
@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
       redirect_to basket_user_path, notice: availability_error_message(@ebooks)
     end
   end
-
+e
   def show
 
   end
