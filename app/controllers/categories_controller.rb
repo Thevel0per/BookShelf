@@ -40,7 +40,11 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category = Category.find(params[:id])
-    redirect_to root_path, notice: 'Category deleted'
+    if @category.destroy
+      redirect_to root_path, notice: 'Category deleted'
+    else
+      redirect_to root_path, notice: 'There was a problem removing category'
+    end
   end
 
   private
