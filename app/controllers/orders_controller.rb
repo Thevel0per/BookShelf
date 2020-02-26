@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
       redirect_to basket_user_path, notice: availability_error_message(@ebooks)
     end
   end
-e
+
   def show
 
   end
