@@ -1,10 +1,10 @@
 class OrdersController < ApplicationController
   def index
-    @orders = Order.where(user_id: current_user.id)
+    @orders = Order.where(user_id: current_user.id).paginate(page: params[:page], per_page: 5)
   end
 
   def create
-    @order = Order.new(user_id: current_user.id).paginate(page: params[:page], per_page: 5)
+    @order = Order.new(user_id: current_user.id)
     @ebooks = ordered_ebooks
     if available?(@ebooks)
       @order.save
