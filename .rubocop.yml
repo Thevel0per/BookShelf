@@ -1,0 +1,17 @@
+AllCops:
+  Include:
+    - Rakefile
+    - config.ru
+  Exclude:
+    - db/**
+    - config/**
+    - script/**
+
+Style/Documentation:
+  Enabled: false
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false

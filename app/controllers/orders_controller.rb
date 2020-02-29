@@ -27,14 +27,14 @@ class OrdersController < ApplicationController
   end
 
   def available?(ebooks)
-    ebooks.all? { |ebook| ebook.stock >= ebook.quantity(current_user.id) }
+    ebooks.all? { |ebook| ebook.stock >= ebook.quantity(user_id: current_user.id) }
   end
 
   def availability_error_message(ebooks)
     message = "Order couldn't be made, you have tried to order: "
     ebooks.each do |e|
       stock = e.available
-      quantity = ebooks.quantity(current_user.id)
+      quantity = ebooks.quantity(user_id: current_user.id)
       message += "#{quantity}x '#{e.title}',only #{stock} available " if stock < quantity
     end
     message
@@ -42,7 +42,7 @@ class OrdersController < ApplicationController
 
   def create_order_ebooks(ebooks, order_id)
     ebooks.each do |e|
-      quantity = e.quantity(current_user.id)
+      quantity = e.quantity(user_id: current_user.id)
       oe = OrderEbook.new(ebook_id: e.id, order_id: order_id, quantity: quantity)
       if oe.save
         e.stock -= quantity

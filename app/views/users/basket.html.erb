@@ -14,10 +14,10 @@
                 <%= e.title %>
               </div>
               <div class="row">
-                <%= "Quantity: #{e.quantity(current_user.id)}"%>
+                <%= "Quantity: #{e.quantity(user_id: current_user.id)}"%>
               </div>
               <div class="row">
-                <%= "#{e.price * e.quantity(current_user.id)} zł"%>
+                <%= "#{e.price * e.quantity(user_id: current_user.id)} zł"%>
               </div>
             </div>
             <div class="col-sm-6 my-auto">
@@ -39,8 +39,8 @@
   <div class="col">
     <div class="row justify-content-end">
       <div class="col">
-        <div class="row justify-content-end"><%= "Amount to pay: #{count_basket_value(@ebooks)[:amount]} zł" %></div>
-        <div class="row justify-content-end"><small><%= "Full value: #{count_basket_value(@ebooks)[:full_value]} zł | Discount: #{count_basket_value(@ebooks)[:discount]} zł" %></small></div>
+        <div class="row justify-content-end"><%= "Amount to pay: #{count_basket_value(@ebooks, current_user)[:amount]} zł" %></div>
+        <div class="row justify-content-end"><small><%= "Full value: #{count_basket_value(@ebooks, current_user)[:full_value]} zł | Discount: #{count_basket_value(@ebooks, current_user)[:discount]} zł" %></small></div>
       </div>
     </div>
     <div class="row justify-content-end">

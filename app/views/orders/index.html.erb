@@ -11,7 +11,7 @@
             <div class="col my-auto"><%= "Order no. #{o.id}"%></div>
             <div class="col">
               <% o.ebooks.each do |e| %>
-                <div class="row"><%= "#{e.title} x #{e.ordered_quantity(o.id)}: #{e.ordered_quantity(o.id) * e.price} zł"%></div>
+                <div class="row"><%= "#{e.title} x #{e.quantity(order_id: o.id)}: #{e.quantity(order_id: o.id) * e.price} zł"%></div>
               <% end %>
             </div>
           </div>

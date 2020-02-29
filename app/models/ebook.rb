@@ -11,11 +11,15 @@ class Ebook < ApplicationRecord
   validates :abstract, presence: true
   validates :description, presence: true
 
-  def quantity(user_id)
-    UserEbook.where(user_id: user_id, ebook_id: id).first.quantity
-  end
+  def quantity(user_id: nil, order_id: nil)
+    if user_id
+      return UserEbook.where(user_id: user_id, ebook_id: id).first.quantity
+    end
 
-  def ordered_quantity(order_id)
-    OrderEbook.where(order_id: order_id, ebook_id: id).first.quantity
+    if order_id
+      return OrderEbook.where(order_id: order_id, ebook_id: id).first.quantity
+    end
+
+    raise ArgumentError, 'You have to pass either user_id or order_id'
   end
 end
